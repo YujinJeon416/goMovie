@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 3.0규격을 참고해라 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace=패키지명과 인터페이스 명과 같아야한다 -->
+<mapper namespace="icia.kotlin.mapper.MapperInterface">
+	<select id="isMember" resultType="int"><!-- id=매서드 이름과 동일해야한다 
+	resultType 은 리턴과 같다  -->
+	SELECT count(*) FROM ST where ST_ID = #{mId}
+	</select>
+	
+	<select id="isAccess" resultType="int">
+	SELECT count(*) FROM ST where ST_ID = #{mId} AND ST_PASSWORD = #{mPwd}
+	</select>
+	
+	<select id="getMemberInfo" resultType="icia.kotlin.beans.ServiceBeans">
+	SELECT st_id as mId , st_name as mName , st_phone as mPhone FROM ST where ST_ID = #{mId} AND ST_PASSWORD = #{mPwd}
+	</select>
+	
+	<insert id="insCustomer" >
+	INSERT INTO st(st.st_id, st.st_name, st.st_password, st.st_phone) VALUES(#{mId},#{mName},#{mPwd},#{mPhone})
+	</insert>
+	
+	<insert id="insMovie" >
+	INSERT INTO mv(mv.mv_code, mv.mv_name, mv.mv_grade, mv.mv_status, mv.mv_image, mv.mv_comments) VALUES(#{mv_code},#{mv_name},#{mv_grade},#{mv_status},#{mv_image},#{mv_comments})
+	</insert>
+</mapper>
